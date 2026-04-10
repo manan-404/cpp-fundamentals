@@ -8,4 +8,3 @@ int main(){
     return 0;
 }
 
-// Added Hello World program
