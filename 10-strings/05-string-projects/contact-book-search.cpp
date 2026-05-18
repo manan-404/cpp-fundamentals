@@ -1,23 +1,38 @@
 #include <iostream>
+#include <vector>
+#include <string>
 using namespace std;
 
-int main() {
-    int n;
-    cout << "Enter number of contacts: ";
-    cin >> n;
+struct Contact {
+    string name;
+    string phone;
+};
 
-    string names[n];
-    string numbers[n];
+void searchContact(const vector<Contact>& contacts, string key) {
+    bool found = false;
 
-    cin.ignore();
-
-    for (int i = 0; i < n; i++) {
-        cout << "Enter name: ";
-        getline(cin, names[i]);
-
-        cout << "Enter number: ";
-        getline(cin, numbers[i]);
+    for (auto c : contacts) {
+        if (c.name.find(key) != string::npos || c.phone.find(key) != string::npos) {
+            cout << "Name: " << c.name << " | Phone: " << c.phone << endl;
+            found = true;
+        }
     }
 
-    string searchName;
-    cout << "\n
+    if (!found) cout << "No contact found.\n";
+}
+
+int main() {
+    vector<Contact> contacts = {
+        {"Ali", "03001234567"},
+        {"Sara", "03111222333"},
+        {"Ahmed", "03214567890"}
+    };
+
+    string key;
+    cout << "Search Contact: ";
+    getline(cin, key);
+
+    searchContact(contacts, key);
+
+    return 0;
+}
