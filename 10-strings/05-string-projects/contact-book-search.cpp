@@ -1,38 +1,50 @@
 #include <iostream>
-#include <vector>
 #include <string>
 using namespace std;
 
-struct Contact {
-    string name;
-    string phone;
-};
+int main()
+{
+    const int size = 5;
 
-void searchContact(const vector<Contact>& contacts, string key) {
+    string names[size];
+    string numbers[size];
+
+    cout << "===== Contact Book =====\n\n";
+
+    for(int i = 0; i < size; i++)
+    {
+        cout << "Enter name for contact " << i + 1 << ": ";
+        getline(cin, names[i]);
+
+        cout << "Enter phone number: ";
+        getline(cin, numbers[i]);
+
+        cout << endl;
+    }
+
+    string searchName;
+    cout << "Enter name to search: ";
+    getline(cin, searchName);
+
     bool found = false;
 
-    for (auto c : contacts) {
-        if (c.name.find(key) != string::npos || c.phone.find(key) != string::npos) {
-            cout << "Name: " << c.name << " | Phone: " << c.phone << endl;
+    for(int i = 0; i < size; i++)
+    {
+        if(names[i] == searchName)
+        {
+            cout << "\nContact Found!\n";
+            cout << "Name: " << names[i] << endl;
+            cout << "Phone: " << numbers[i] << endl;
+
             found = true;
+            break;
         }
     }
 
-    if (!found) cout << "No contact found.\n";
-}
-
-int main() {
-    vector<Contact> contacts = {
-        {"Ali", "03001234567"},
-        {"Sara", "03111222333"},
-        {"Ahmed", "03214567890"}
-    };
-
-    string key;
-    cout << "Search Contact: ";
-    getline(cin, key);
-
-    searchContact(contacts, key);
+    if(!found)
+    {
+        cout << "\nContact not found.";
+    }
 
     return 0;
 }
